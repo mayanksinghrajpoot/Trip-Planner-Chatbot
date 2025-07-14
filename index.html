@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Travel Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'travel-primary': {
+                light: '#4fd1c5',
+                DEFAULT: '#38b2ac',
+                dark: '#319795',
+              },
+              'light-bg': '#f7f7f7',
+              'surface-bg': '#ffffff',
+              'subtle-border': '#e5e5e5',
+              'medium-border': '#d4d4d4',
+              'text-dark': '#2d3748',
+              'text-medium': '#4a5568',
+              'text-light': '#718096',
+            },
+            fontFamily: {
+              sans: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+            },
+            boxShadow: {
+              'travel': '0 4px 0 #319795',
+              'travel-lg': '0 6px 0 #319795',
+            }
+          }
+        }
+      }
+    </script>
+
+    <style type="text/tailwindcss">
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { @apply bg-gray-100 rounded-lg; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { @apply bg-gray-300 rounded-lg; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { @apply bg-gray-400; }
+        textarea { overflow: auto !important; }
+        .message-container { @apply opacity-0 translate-y-2 transition-all duration-300 ease-out; }
+        .message-container.animate-in { @apply opacity-100 translate-y-0; }
+        #image-preview-overlay.active { @apply opacity-100 pointer-events-auto; }
+        .btn-travel:active { @apply shadow-none translate-y-[2px]; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-red-800 via-gray-900 to-green-900 min-h-screen flex justify-center items-center p-4 font-sans">
+    <div class="flex flex-col w-full max-w-2xl h-[90vh] max-h-[750px] bg-surface-bg rounded-2xl shadow-xl border border-subtle-border overflow-hidden backdrop-blur-sm bg-white/90">
+        <!-- Header Section -->
+        <header class="p-4 border-b border-subtle-border flex items-center justify-between flex-shrink-0 bg-surface-bg/95">
+            <div class="flex items-center gap-3">
+                <i class="fas fa-globe-americas text-3xl text-travel-primary"></i>
+                <h1 class="text-xl font-bold text-text-dark">AI Travel Guide</h1>
+            </div>
+            <select id="destinationSelect" title="Select Language"
+                    class="h-9 px-3 text-sm bg-gray-100 border border-medium-border rounded-lg text-text-medium focus:outline-none focus:ring-2 focus:ring-travel-primary/50 focus:border-travel-primary cursor-pointer">
+                <option value="en">🇬🇧 English</option>
+                <option value="es">🇪🇸 Spanish</option>
+                <option value="fr">🇫🇷 French</option>
+                <option value="de">🇩🇪 German</option>
+                <option value="it">🇮🇹 Italian</option>
+                <option value="ja">🇯🇵 Japanese</option>
+                <option value="zh">🇨🇳 Chinese</option>
+                <option value="hi">🇮🇳 Hindi</option>
+            </select>
+        </header>
+
+        <!-- Chat Container -->
+        <main id="chatContainer" class="flex-1 overflow-y-auto p-4 md:p-6 space-y-4 bg-light-bg/90 custom-scrollbar">
+            <!-- Dynamic chat bubbles -->
+        </main>
+
+        <!-- Input Area -->
+        <footer class="p-3 md:p-4 border-t border-subtle-border flex items-center gap-3 flex-shrink-0 bg-surface-bg/95">
+            <button id="image-button" type="button" title="Upload Image (Click again to clear)"
+                    class="relative flex-shrink-0 w-11 h-11 bg-gray-100 hover:bg-gray-200 text-text-medium rounded-full flex items-center justify-center cursor-pointer transition-colors border-2 border-medium-border focus:outline-none focus:ring-2 focus:ring-travel-primary/50 focus:border-travel-primary">
+                <i class="fas fa-image"></i>
+                <input type="file" id="image-input" accept="image/*" class="hidden">
+                <img id="image-preview-overlay" src="" alt="Preview" class="absolute inset-0 w-full h-full object-cover rounded-full opacity-0 transition-opacity duration-200 pointer-events-none border-2 border-travel-primary">
+            </button>
+
+            <textarea id="prompt" placeholder="Ask about destinations, travel tips, or share photos..." rows="1"
+                      class="flex-1 resize-none overflow-hidden p-2.5 px-4 min-h-[44px] max-h-28 bg-gray-100 border-2 border-medium-border rounded-xl text-base text-text-dark placeholder-text-light focus:outline-none focus:ring-2 focus:ring-travel-primary/50 focus:border-travel-primary transition-all custom-scrollbar"></textarea>
+
+            <button id="submit" type="button" title="Send Message"
+                     class="btn-travel flex-shrink-0 w-16 h-11 bg-travel-primary hover:bg-travel-primary-dark text-white rounded-xl flex items-center justify-center transition-all shadow-travel focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-travel-primary/70 font-semibold uppercase text-sm tracking-wider">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </footer>
+    </div>
+    <script src="private.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
