@@ -1,14 +1,5 @@
-// const dotenv = require('dotenv');
-// // Load environment variables from .env file
-// dotenv.config();
-// require('dotenv');
-// --- API Configuration ---
-// const API_KEY = require('./private.js')(); // Call the function to get the API key
 
-// const API_KEY = require("./private");
-
-// console.log("API Key:", API_KEY); // For debugging purposes, remove in production
-API_KEY = API_KEY(); // Ensure we call the function to get the key
+API_KEY = "YOUR API KEY HERE";
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
 // --- DOM Element References ---
